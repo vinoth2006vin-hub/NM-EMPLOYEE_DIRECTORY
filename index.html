@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Directory</title>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .card {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .name {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .title {
+      color: #777;
+    }
+
+    .email {
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Employee Directory</h1>
+    <input type="text" id="searchInput" placeholder="Search employees...">
+    <div id="employeeList"></div>
+  </div>
+
+  <script>
+    const employees = [
+      { name: "Alice Johnson", title: "Software Engineer", email: "alice@example.com" },
+      { name: "Bob Smith", title: "Product Manager", email: "bob@example.com" },
+      { name: "Kalai Selvan", title: "UX Designer", email: "p.kalaiselvan@gmail.com" },
+      { name: "Raja Sundar", title: "QA Analyst", email: "sundarraja759@gamil.com" },
+      { name: "Bala Sriram", title: "Data Scientist", email: "balasriram450@gmail.com" },
+      { name: "Thomas Koilraj", title: "Data Scientist", email: "thomaskoilraj6@gmail.com" }
+    ];
+
+    const searchInput = document.getElementById('searchInput');
+    const employeeList = document.getElementById('employeeList');
+
+    // Function to render employee cards
+    function renderEmployees(filteredList) {
+      employeeList.innerHTML = '';
+      filteredList.forEach(emp => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="name">${emp.name}</div>
+          <div class="title">${emp.title}</div>
+          <div class="email">${emp.email}</div>
+        `;
+        employeeList.appendChild(card);
+      });
+    }
+
+    // Initial render
+    renderEmployees(employees);
+
+    // Search functionality
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.toLowerCase();
+      const filtered = employees.filter(emp =>
+        emp.name.toLowerCase().includes(query) ||
+        emp.title.toLowerCase().includes(query)
+      );
+      renderEmployees(filtered);
+    });
+  </script>
+
+</body>
+</html>
